@@ -25,7 +25,7 @@ export default function Form() {
 
     // GrowSurf API request
     try {
-      const res = await fetch('https://growsurf.com/api/v2/participants', {
+      const res = await fetch('https://growsurf.com/api/v2/participants ', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
