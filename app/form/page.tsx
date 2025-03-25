@@ -25,7 +25,7 @@ export default function Form() {
 
     // GrowSurf API request
     try {
-      const res = await fetch('https://growsurf.com/api/v2/participants ', {
+      const res = await fetch('https://api.growsurf.com/v2/campaign/10inlw/participant', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,9 +42,9 @@ export default function Form() {
         throw new Error('Failed to register with GrowSurf');
       }
 
-      console.log('GrowSurf registration successful');
+      alert('GrowSurf registration successful');
     } catch (error) {
-      console.error('GrowSurf Error:', error);
+      alert(error);
     }
 
     alert('Form data saved!');
