@@ -1,8 +1,8 @@
 'use client';
-import type { Metadata } from 'next';
+import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { useEffect } from 'react';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,22 +20,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Ensure it runs only on the client side
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const referralCode = searchParams.get('grsf'); // Extract referral code from URL
+
+    if (referralCode) {
+      localStorage.setItem('referralCode', referralCode); // Store in localStorage
+      console.log('Referral code saved:', referralCode);
+    }
 
     const script = document.createElement('script');
-    script.src = 'https://growsurf.com/growsurf.js';
+    script.src = 'https://app.growsurf.com/growsurf.js';
     script.async = true;
-    
-    
+    script.setAttribute('grsf-campaign', '10inlw'); // Set your campaign ID
 
     script.onload = () => {
       console.log('GrowSurf script loaded.');
     };
-    document.body.appendChild(script);
 
+    document.body.appendChild(script);
   }, []);
+
   return (
-    <html lang='en'>
-      <head>
+    <html lang="en">
+       <head>
       <script
         type='text/javascript'
         id="growsurf-script"
@@ -54,9 +63,7 @@ export default function RootLayout({
         }}
       />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>
