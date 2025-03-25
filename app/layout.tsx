@@ -1,6 +1,5 @@
 'use client';
 import { useEffect } from 'react';
-import type { Metadata } from 'next';
 import { useSearchParams } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
@@ -20,9 +19,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const searchParams = useSearchParams();
-
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Ensure it runs only on the client side
+
+    const searchParams = new URLSearchParams(window.location.search);
     const referralCode = searchParams.get('grsf'); // Extract referral code from URL
 
     if (referralCode) {
@@ -40,7 +40,7 @@ export default function RootLayout({
     };
 
     document.body.appendChild(script);
-  }, [searchParams]);
+  }, []);
 
   return (
     <html lang="en">
