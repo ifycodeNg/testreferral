@@ -12,6 +12,8 @@ type ParticipantData = {
   email: string;
   firstName: string;
   totalReferrals: number;
+  shareUrl: string;
+  referralCount: any;
 };
 
 export default function Dashboard() {
@@ -89,14 +91,14 @@ export default function Dashboard() {
                 GrowSurf Participant Details
               </h2>
               <p>
-                <strong>ID:</strong> {participantData.id}
+                <strong>Referral Link:</strong> {participantData.shareUrl}
               </p>
               <p>
                 <strong>Email:</strong> {participantData.email}
               </p>
               <p>
                 <strong>Total Referrals:</strong>{' '}
-                {participantData.totalReferrals}
+                {participantData.referralCount}
               </p>
             </div>
           ) : (
