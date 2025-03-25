@@ -5,6 +5,7 @@ import Head from "next/head";
 
 export default function Form() {
   const [formData, setFormData] = useState({ name: '', email: '' });
+  const [referralCode, setReferralCode] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -14,6 +15,14 @@ export default function Form() {
     }
   }, []);
 
+  useEffect(() => {
+    const storedCode = localStorage.getItem('referralCode');
+    if (storedCode) {
+      setReferralCode(storedCode);
+      console.log('Referral code retrieved:', storedCode);
+    }
+  }, []);
+  
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -35,6 +44,7 @@ export default function Form() {
           campaignId: '10inlw', // Replace with your actual campaign ID
           email: formData.email,
           firstName: formData.name,
+          referredBy: referralCode || null,
         }),
       });
 
