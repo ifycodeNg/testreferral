@@ -88,7 +88,7 @@ export default function Dashboard() {
           {participantData ? (
             <div className='p-4 border rounded shadow-md'>
               <h2 className='text-lg font-semibold mb-2'>
-                GrowSurf Participant Details
+                9th Marketplace User Details
               </h2>
               <p>
                 <strong>Referral Link:</strong> {participantData.shareUrl}

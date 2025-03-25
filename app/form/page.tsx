@@ -79,7 +79,7 @@ export default function Form() {
             required
           />
           <button type='submit' className='bg-blue-500 text-white p-2 rounded'>
-            Save & Go to Dashboard
+           Sign Up
           </button>
         </form>
       </div>
